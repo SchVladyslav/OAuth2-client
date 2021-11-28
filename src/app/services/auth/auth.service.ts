@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AuthResponse } from 'src/app/interfaces/auth.interface';
+import { AuthResponse, AuthData } from 'src/app/interfaces/auth.interface';
+import { Environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,12 @@ export class AuthService {
   private readonly baseUrl: string;
 
   constructor(protected httpClient: HttpClient) {
-    this.baseUrl = '/api/auth';
+    this.baseUrl = Environment.apiHost + '/auth';
   }
 
-  public login(email: string, password: string): Observable<AuthResponse> {
+  public login(user: AuthData): Observable<AuthResponse> {
     return this.httpClient
-      .post<AuthResponse>(`${this.baseUrl}/login`, { email, password })
+      .post<AuthResponse>(`${this.baseUrl}/login`, { ...user })
       .pipe(
         tap(({ accessToken }) => {
           localStorage.setItem('auth-token', accessToken);
@@ -26,14 +27,10 @@ export class AuthService {
       );
   }
 
-  public registration(
-    email: string,
-    password: string
-  ): Observable<AuthResponse> {
+  public signup(user: AuthData): Observable<AuthResponse> {
     return this.httpClient
       .post<AuthResponse>(`${this.baseUrl}/signup`, {
-        email,
-        password,
+        ...user,
       })
       .pipe(
         tap(({ accessToken }) => {

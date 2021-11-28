@@ -10,6 +10,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Environment } from 'src/environments/environment';
 
 @Injectable()
 export class HttpApiInterceptor implements HttpInterceptor {

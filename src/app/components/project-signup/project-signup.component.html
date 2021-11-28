@@ -2,21 +2,18 @@
   <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="label__group">
-        <label class="form__label" for="email">Email</label>
+        <label class="form__label" for="id">Name</label>
         <span
           *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
           class="form__validation"
         >
           <span *ngIf="form.get('email')?.errors?.required">Required</span>
-          <span *ngIf="form.get('email')?.errors?.email"
-            >Invalid email address</span
-          >
         </span>
       </div>
       <input
         class="form__input"
         formControlName="email"
-        id="email"
+        id="id"
         type="email"
         [ngClass]="{
           invalid: form.get('email')?.invalid && form.get('email')?.touched
@@ -25,7 +22,7 @@
     </div>
     <div class="form-group">
       <div class="label__group">
-        <label class="form__label" for="pass">Password</label>
+        <label class="form__label" for="pass">Redirect URL</label>
         <span
           *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
           class="form__validation"
@@ -49,9 +46,8 @@
       [disabled]="form.invalid || form.disabled"
       type="submit"
     >
-      Log In
+      Add Project
       <ngx-spinner
-        name="login"
         bdColor="rgba(255, 255, 255, 0.5)"
         color="var($main-color-button)"
         size="medium"
@@ -59,10 +55,5 @@
         [fullScreen]="false"
       ></ngx-spinner>
     </button>
-
-    <button class="form__button" type="button" (click)="logInWithOAuth()">Sign In with OAuth2</button>
   </form>
 </div>
-<a class="card__link" routerLink="/signup"
-  >Don't have an account? <span>Sign Up</span></a
->

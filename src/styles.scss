@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+// main modules of styles
+@import url("./assets/scss/normalize.scss");
+@import url("./assets/scss/global-styles.scss");
+@import url("./assets/scss/abstracts/vars.scss");
+@import url("./assets/scss/components/form/_form.scss");
