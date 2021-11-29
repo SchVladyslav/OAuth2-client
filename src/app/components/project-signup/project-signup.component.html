@@ -1,43 +1,42 @@
-<div class="card">
+<div *ngIf="!isProjectsExist" class="card">
   <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="label__group">
         <label class="form__label" for="id">Name</label>
         <span
-          *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+          *ngIf="form.get('name')?.invalid && form.get('name')?.touched"
           class="form__validation"
         >
-          <span *ngIf="form.get('email')?.errors?.required">Required</span>
+          <span *ngIf="form.get('name')?.errors?.required">Required</span>
         </span>
       </div>
       <input
         class="form__input"
-        formControlName="email"
+        formControlName="name"
         id="id"
-        type="email"
+        type="text"
         [ngClass]="{
-          invalid: form.get('email')?.invalid && form.get('email')?.touched
+          invalid: form.get('name')?.invalid && form.get('name')?.touched
         }"
       />
     </div>
     <div class="form-group">
       <div class="label__group">
-        <label class="form__label" for="pass">Redirect URL</label>
+        <label class="form__label" for="url">Redirect URL</label>
         <span
-          *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+          *ngIf="form.get('url')?.invalid && form.get('url')?.touched"
           class="form__validation"
         >
-          <span *ngIf="form.get('password')?.errors?.required">Required</span>
+          <span *ngIf="form.get('url')?.errors?.required">Required</span>
         </span>
       </div>
       <input
         class="form__input"
-        formControlName="password"
-        id="pass"
-        type="password"
+        formControlName="url"
+        id="url"
+        type="text"
         [ngClass]="{
-          invalid:
-            form.get('password')?.invalid && form.get('password')?.touched
+          invalid: form.get('url')?.invalid && form.get('url')?.touched
         }"
       />
     </div>
@@ -56,4 +55,40 @@
       ></ngx-spinner>
     </button>
   </form>
+</div>
+
+<div *ngIf="projectData" class="card">
+  <div class="form-group">
+    <ul>
+      <li *ngFor="let item of projectData; let i = index">
+        <div class="label__group">
+          <label class="form__label" [for]="'name' + i">Name</label>
+        </div>
+        <input
+          class="form__input"
+          [id]="'name' + i"
+          type="text"
+          [value]="item.name"
+        />
+        <div class="label__group">
+          <label class="form__label" for="id">ProjectID</label>
+        </div>
+        <input
+          class="form__input"
+          id="id"
+          type="text"
+          [value]="item.projectID"
+        />
+        <div class="label__group">
+          <label class="form__label" for="url">Redirect URL</label>
+        </div>
+        <input
+          class="form__input"
+          id="url"
+          type="text"
+          [value]="item.redirectURLs[0]"
+        />
+      </li>
+    </ul>
+  </div>
 </div>

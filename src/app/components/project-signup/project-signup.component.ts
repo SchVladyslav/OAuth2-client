@@ -10,25 +10,30 @@ import { AbstractPageDirective } from 'src/app/shared/abstract-page/abstract-pag
 @Component({
   selector: 'app-project-signup',
   templateUrl: './project-signup.component.html',
-  styleUrls: ['./project-signup.component.scss']
+  styleUrls: ['./project-signup.component.scss'],
 })
-export class ProjectSignUpComponent extends AbstractPageDirective implements OnInit {
+export class ProjectSignUpComponent
+  extends AbstractPageDirective
+  implements OnInit
+{
   form: FormGroup;
+  projectData: any;
 
   constructor(
     private projectService: ProjectService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private notificationService: NotificationService, 
+    private notificationService: NotificationService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      url: new FormControl('', [Validators.required]),
     });
+    this.getProjects();
   }
 
   onSubmit(): void {
@@ -36,14 +41,38 @@ export class ProjectSignUpComponent extends AbstractPageDirective implements OnI
     this.projectService
       .projectSignUp(this.form.value)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        () => {
-          this.router.navigate(['/dashboard']);
+      .subscribe({
+        next: (data: any) => {
+          this.projectData = data;
+          console.log(data);
+          this.notificationService.show(
+            `${this.form.value.name} added successfuly`,
+            'success'
+          );
+          this.spinner.hide();
         },
-        (error) => {
+        error: (error) => {
           this.spinner.hide();
           this.notificationService.show(error.error.message, 'error');
         }
-      );
+      });
+  }
+
+  getProjects(): void {
+    this.projectService
+      .getProjects()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data: any) => {
+          this.projectData = data;
+        },
+        error: (error) => {
+          this.notificationService.show(error.error.message, 'error');
+        }
+      });
+  }
+
+  get isProjectsExist(): boolean {
+    return this.projectData;
   }
 }

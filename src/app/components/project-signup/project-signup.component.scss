@@ -1,2 +1,6 @@
 @import '../../../assets/scss/components/card/card';
 @import '../../../assets/scss/components/form/form';
+
+.card + .card {
+    margin-top: 40px;
+}

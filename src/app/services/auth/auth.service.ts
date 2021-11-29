@@ -20,9 +20,8 @@ export class AuthService {
     return this.httpClient
       .post<AuthResponse>(`${this.baseUrl}/login`, { ...user })
       .pipe(
-        tap(({ accessToken }) => {
-          localStorage.setItem('auth-token', accessToken);
-          this.setToken(accessToken);
+        tap(({ access_token }) => {
+          this.setTokenInLC(access_token)
         })
       );
   }
@@ -33,15 +32,19 @@ export class AuthService {
         ...user,
       })
       .pipe(
-        tap(({ accessToken }) => {
-          localStorage.setItem('auth-token', accessToken);
-          this.setToken(accessToken);
+        tap(({ access_token }) => {
+          this.setTokenInLC(access_token)
         })
       );
   }
 
   public logout(): Observable<void> {
     return this.httpClient.post<void>(`/logout`, {});
+  }
+
+  public setTokenInLC(access_token: string): void {
+    localStorage.setItem('auth-token', access_token);
+    this.setToken(access_token);
   }
 
   setToken(token: string): void {

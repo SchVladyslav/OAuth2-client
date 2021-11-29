@@ -60,9 +60,24 @@
       ></ngx-spinner>
     </button>
 
-    <button class="form__button" type="button" (click)="logInWithOAuth()">Sign In with OAuth2</button>
+    <button
+      *ngIf="!isOAuthMode"
+      class="form__button"
+      type="button"
+      (click)="logInWithOAuth()"
+    >
+      Sign In with OAuth2
+      <ngx-spinner
+        name="oauthLogin"
+        bdColor="rgba(255, 255, 255, 0.5)"
+        color="var($main-color-button)"
+        size="medium"
+        type="line-scale"
+        [fullScreen]="false"
+      ></ngx-spinner>
+    </button>
   </form>
 </div>
-<a class="card__link" routerLink="/signup"
+<a *ngIf="!isOAuthMode" class="card__link" routerLink="/signup"
   >Don't have an account? <span>Sign Up</span></a
 >
