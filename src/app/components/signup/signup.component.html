@@ -85,17 +85,12 @@
         }"
       />
     </div>
-    <p class="form__text">
-      By creating an account, you agree to Blockchain’s
-      <a routerLink="/">Terms of Service</a> &
-      <a routerLink="/">Privacy Policy.</a>
-    </p>
     <button
       class="form__button"
       [disabled]="form.invalid || form.disabled"
       type="submit"
     >
-      Create Wallet
+      Create Account
       <ngx-spinner
         name="signup"
         bdColor="rgba(255, 255, 255, 0.5)"
@@ -107,3 +102,4 @@
     </button>
   </form>
 </div>
+<a class="card__link" routerLink="/login">Already have an account? <span>Log In</span></a>

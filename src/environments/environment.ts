@@ -2,9 +2,9 @@ export class Environment {
   static production = false;
   static version = "v1.0.0";
   static apiHost = "http://localhost:5000/api";
-  static projectSecret = "$2b$04$MFle1TA9AL/saAYE7Ar/fOST3gu91waXmpZJDUAHrsU0gT/8xAuDy";
-  static projectID = "project1.oauth.app";
-  static redirectURL = "https://google.com";
+  static projectSecret = "$2b$04$LEE2W1o4Lc/kBEujam0h9Of/dAp9tP8SbQfEtyALCFzsiaci6muUK";
+  static projectID = "users_list.oauth.app";
+  static redirectURL = "http://localhost:4200/users";
 }
 
 export const environment = new Environment();

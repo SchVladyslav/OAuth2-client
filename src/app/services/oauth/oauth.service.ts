@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Environment } from 'src/environments/environment';
-import { ProjectService } from '../project/project.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,9 +39,5 @@ export class OAuthService {
       .append('projectSecret', Environment.projectSecret);
 
     return this.httpClient.get<any>(`${this.baseUrl}/token`, { params });
-  }
-
-  public getUser(): Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/user`);
   }
 }

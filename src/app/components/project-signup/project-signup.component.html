@@ -56,8 +56,7 @@
     </button>
   </form>
 </div>
-
-<div *ngIf="projectData" class="card">
+<div *ngIf="isProjectsExist" class="card">
   <div class="form-group">
     <ul>
       <li *ngFor="let item of projectData; let i = index">
@@ -80,6 +79,19 @@
           [value]="item.projectID"
         />
         <div class="label__group">
+          <label class="form__label" for="url">Project Secret</label>
+        </div>
+        <input
+          class="form__input"
+          id="url"
+          type="text"
+          [value]="item.projectSecret"
+        />
+        <div class="label__group">
+          <label class="form__label" for="url">Scope</label>
+        </div>
+        <input class="form__input" id="url" type="text" [value]="item.scope" />
+        <div class="label__group">
           <label class="form__label" for="url">Redirect URL</label>
         </div>
         <input
@@ -91,4 +103,5 @@
       </li>
     </ul>
   </div>
+  <button class="form__button" [routerLink]="['/login']" type="button">Back</button>
 </div>

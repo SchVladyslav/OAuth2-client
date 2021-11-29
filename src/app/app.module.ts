@@ -16,6 +16,7 @@ import { NotificationModalComponent } from './components/modal/notification-moda
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout/site-layout.component';
 import { ProjectSignUpComponent } from './components/project-signup/project-signup.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProjectSignUpComponent } from './components/project-signup/project-sign
     SiteLayoutComponent,
     NotificationModalComponent,
     ProjectSignUpComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

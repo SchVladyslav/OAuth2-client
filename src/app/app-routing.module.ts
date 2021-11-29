@@ -4,16 +4,19 @@ import { AuthGuard } from './auth.guard';
 import { LogInComponent } from './components/login/login.component';
 import { ProjectSignUpComponent } from './components/project-signup/project-signup.component';
 import { SignUpComponent } from './components/signup/signup.component';
+import { UsersComponent } from './components/users/users.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {
-    path: '', component: AuthLayoutComponent,
+    path: '',
+    component: AuthLayoutComponent,
     children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LogInComponent },
       { path: 'signup', component: SignUpComponent },
-      { path: 'project', component: ProjectSignUpComponent }
+      { path: 'project', canActivate: [AuthGuard], component: ProjectSignUpComponent },
+      { path: 'users', canActivate: [AuthGuard], component: UsersComponent },
     ],
   },
 

@@ -39,22 +39,27 @@ export class SignUpComponent extends AbstractPageDirective implements OnInit {
   }
 
   onSubmit() {
-    this.spinner.show("signup");
+    this.spinner.show('signup');
     this.authService
       .signup(this.form.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
+          this.notificationService.show(
+            `Account has been successfulfy created!`,
+            'success'
+          );
           this.router.navigate(['/login'], {
             queryParams: {
               registered: true,
             },
           });
+          this.spinner.hide('signup');
         },
         error: (error) => {
-          this.spinner.hide("signup");
+          this.spinner.hide('signup');
           this.notificationService.show(error.error.message, 'error');
-        }
+        },
       });
   }
 }
